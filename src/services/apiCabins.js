@@ -17,17 +17,37 @@ export async function getCabins() {
 
 }
 
-export async function createCabin(newCabin) {
+export async function createEditCabin(newCabin, id) {
 
-    const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll("/", "");
+    console.log("newCabin: ", newCabin, id);
+    const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
+    const imageName = `${Math.random()}-${newCabin?.image?.name}`.replaceAll("/", "");
     //https://aomneokqfesxugopemru.supabase.co/storage/v1/object/public/cabin-images/cabin-001.jpg
-    const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`
+    const imagePath = hasImagePath
+        ? newCabin.image
+        : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
 
-    const { data, error } = await supabase
-        .from('cabins')
-        .insert([{ ...newCabin, image: imagePath }])
-        .select()
+    let data, error;
+    if (!id) {
 
+        ({ data, error } = await supabase
+            .from('cabins')
+            .insert({ ...newCabin, image: imagePath })
+            .select())
+    }
+
+
+
+    if (id) {
+
+        ({ data, error } = await supabase
+            .from('cabins')
+            .update({ ...newCabin, image: imagePath })
+            .eq('id', id)
+            .select())
+
+
+    }
     if (error) {
         console.error(error)
         throw new Error("Cabins could not be loaded")
