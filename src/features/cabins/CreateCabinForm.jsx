@@ -33,6 +33,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModel }) {
         {
           onSuccess: (data) => {
             reset();
+            onCloseModel?.();
           },
         }
       )
@@ -52,7 +53,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModel }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form onSubmit={handleSubmit(onSubmit, onError)} type={onCloseModel ? "modal" : "regular"}>
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input type="text" id="name" {...register('name', { required: "This field is required" })} disabled={isWorking} />
       </FormRow>
@@ -92,7 +93,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModel }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset" disabled={isWorking} onClick={onCloseModel}>
+        <Button variation="secondary" type="reset" disabled={isWorking} onClick={() => onCloseModel?.()}>
           Cancel
         </Button>
         <Button disabled={isWorking}>{isEditSession ? "Edit cabin" : "Create new cabin"}</Button>
