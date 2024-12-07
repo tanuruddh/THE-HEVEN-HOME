@@ -8,6 +8,9 @@ import { useDeleteCabin } from "./useDeleteCabin.js";
 import { HiPencil, HiTrash } from "react-icons/hi";
 import { HiSquare2Stack } from "react-icons/hi2";
 import { useCreateCabin } from "./useCreateCabin.js";
+import Modal from "../../ui/Modal.jsx";
+import ConfirmDelete from '../../ui/ConfirmDelete.jsx'
+
 
 const TableRow = styled.div`
   display: grid;
@@ -50,7 +53,6 @@ const Discount = styled.div`
 
 function CabinRow({ cabin }) {
 
-  const [isShowForm, setIsShowForm] = useState(false);
   const { isDeleting, deleteCabin } = useDeleteCabin();
   const { isCreating, createCabin } = useCreateCabin();
 
@@ -74,7 +76,6 @@ function CabinRow({ cabin }) {
       image,
       description,
     })
-    setIsShowForm(false)
   }
 
   return (
@@ -86,12 +87,33 @@ function CabinRow({ cabin }) {
         <Price>{formatCurrency(regularPrice)}</Price>
         {discount ? <Discount>{formatCurrency(discount)}</Discount> : <span>&mdash;</span>}
         <div>
-          <button disabled={isCreating} onClick={handleDuplicate}><HiSquare2Stack /></button>
-          <button onClick={() => setIsShowForm(!isShowForm)}><HiPencil /></button>
-          <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}><HiTrash /></button>
+          <button disabled={isCreating} onClick={handleDuplicate}>
+            <HiSquare2Stack />
+          </button>
+
+          <Modal>
+
+            <Modal.Open opens='edit'>
+              <button >
+                <HiPencil />
+              </button>
+            </Modal.Open>
+
+            <Modal.Window name='edit'>
+              <CreateCabinForm cabinToEdit={cabin} />
+            </Modal.Window>
+
+            <Modal.Open opens='delete'>
+              <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}><HiTrash /></button>
+            </Modal.Open>
+
+            <Modal.Window name='delete'>
+              <ConfirmDelete resourceName='cabins' disabled={isDeleting} />
+            </Modal.Window>
+
+          </Modal>
         </div>
       </TableRow>
-      {isShowForm && <CreateCabinForm cabinToEdit={cabin} />}
     </>
   )
 }
