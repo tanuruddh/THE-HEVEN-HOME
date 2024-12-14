@@ -82,7 +82,7 @@ function Pagination({ count }) {
   return (
     <StyledPagination>
       <P>
-        Showing <spnn>{(currentPage - 1) * PAGE_SIZE + 1}</spnn> to <span>{currentPage === totalPages ? count : currentPage * PAGE_SIZE}</span> of <span>{count}</span> {" "} results
+        Showing <span>{(currentPage - 1) * PAGE_SIZE + 1}</span> to <span>{currentPage === totalPages ? count : currentPage * PAGE_SIZE}</span> of <span>{count}</span> {" "} results
       </P>
 
       <Buttons>
