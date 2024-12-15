@@ -27,10 +27,10 @@ const HeadingGroup = styled.div`
 function BookingDetail() {
   const { booking = {}, isLoading } = useBooking();
   const { checkout, isCheckingOut } = useCheckout();
-  const { isdeleting, deleteBooking } = useDeleteBooking();
+  const { isDeleting, deleteBooking } = useDeleteBooking();
   const navigate = useNavigate();
   const { status, id: bookingId } = booking;
-
+  console.log(isDeleting);
   const moveBack = useMoveBack();
 
   if (isLoading) {
@@ -84,7 +84,7 @@ function BookingDetail() {
               onSettled: () =>
                 navigate(-1)
             })}
-            disabled={isdeleting}
+            disabled={isDeleting}
           />
         </Modal.Window>
       </Modal>

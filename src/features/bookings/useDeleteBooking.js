@@ -3,18 +3,22 @@ import { deleteBooking as deleteBookingApi } from "../../services/apiBookings";
 import toast from "react-hot-toast";
 
 export function useDeleteBooking() {
-    const queryclinet = useQueryClient();
+    const queryClient = useQueryClient();
 
-    const { isLoading: isDeleting, mutate: deleteBooking } = useMutation({
+    const { isPending: isDeleting, mutate: deleteBooking } = useMutation({
+        mutationKey: ['deleteBooking'],  // Add this
         mutationFn: (bookingId) => deleteBookingApi(bookingId),
         onSuccess: () => {
             toast.success("Booking deleted successfully");
-            queryclinet.invalidateQueries({
+            queryClient.invalidateQueries({
                 queryKey: ['bookings']
             })
         },
         onError: () => toast.error("Error in deleting bookings"),
     });
 
-    return { isDeleting, deleteBooking }
+    return {
+        isDeleting,
+        deleteBooking
+    };
 }

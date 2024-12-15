@@ -7,7 +7,7 @@ export function useBooking() {
     console.log(`Booking ${bookingId}`);
 
     const {
-        isLoading,
+        isPending,
         data: booking,
         error
     } = useQuery({
@@ -16,5 +16,5 @@ export function useBooking() {
         retry: false,
     })
 
-    return { isLoading, booking, error }
+    return { isLoading: isPending, booking, error }
 }
