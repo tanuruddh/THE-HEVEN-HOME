@@ -6,9 +6,8 @@ import Logout from "../features/authentication/Logout";
 
 
 const StyledHeaderMenu = styled.ul`
-    display:'flex';
+display: flex;
     gap:0.4rem;
-    flex-direction: row;
 `;
 
 function HeaderMenu() {
