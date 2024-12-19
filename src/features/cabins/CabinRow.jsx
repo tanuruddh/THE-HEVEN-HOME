@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
-import { useState } from "react";
 
 import { formatCurrency } from '../../utils/helpers.js'
 import CreateCabinForm from "./CreateCabinForm.jsx";
