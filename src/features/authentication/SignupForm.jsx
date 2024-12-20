@@ -13,7 +13,7 @@ function SignupForm() {
   const { signup, isLoading } = useSignup();
 
   function onSubmit({ fullName, email, password }) {
-    console.log("Form submitted:");
+    // console.log("Form submitted:");
     signup({ fullName, email, password }, {
       onSettled: () => reset(),
     });

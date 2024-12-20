@@ -1,6 +1,6 @@
 import { PAGE_SIZE } from "../utils/constant.js";
 import { getToday } from "../utils/helpers";
-import supabase from "./superBase.js";
+import supabase from "./supabase.js";
 
 export async function getBookings({ filter, sortBy, page }) {
   let query = supabase
@@ -39,7 +39,7 @@ export async function getBooking(id) {
     console.error(error);
     throw new Error("Booking not found");
   }
-  console.log(data)
+  // console.log(data)
 
   return data;
 }
@@ -79,7 +79,7 @@ export async function getStaysAfterDate(date) {
 
 // Activity means that there is a check in or a check out today
 export async function getStaysTodayActivity() {
-  console.log("timeeeeeeeeee", getToday())
+  // console.log("timeeeeeeeeee", getToday())
   const { data, error } = await supabase
     .from("bookings")
     .select("*, guests(fullName, nationality, countryFlag)")
@@ -91,7 +91,7 @@ export async function getStaysTodayActivity() {
   // Equivalent to this. But by querying this, we only download the data we actually need, otherwise we would need ALL bookings ever created
   // (stay.status === 'unconfirmed' && isToday(new Date(stay.startDate))) ||
   // (stay.status === 'checked-in' && isToday(new Date(stay.endDate)))
-  console.log("Updated bookings", data)
+  // console.log("Updated bookings", data)
 
 
   if (error) {

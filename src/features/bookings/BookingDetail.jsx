@@ -31,7 +31,7 @@ function BookingDetail() {
   const { isDeleting, deleteBooking } = useDeleteBooking();
   const navigate = useNavigate();
   const { status, id: bookingId } = booking;
-  console.log(isDeleting);
+  // console.log(isDeleting);
   const moveBack = useMoveBack();
 
   if (isLoading) {

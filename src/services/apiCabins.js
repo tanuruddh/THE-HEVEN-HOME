@@ -1,4 +1,4 @@
-import supabase, { supabaseUrl } from "./superBase.js";
+import supabase, { supabaseUrl } from "./supabase.js";
 
 export async function getCabins() {
 
@@ -19,7 +19,7 @@ export async function getCabins() {
 
 export async function createEditCabin(newCabin, id) {
 
-    console.log("newCabin: ", newCabin, id);
+    // console.log("newCabin: ", newCabin, id);
     const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
     const imageName = `${Math.random()}-${newCabin?.image?.name}`.replaceAll("/", "");
     //https://aomneokqfesxugopemru.supabase.co/storage/v1/object/public/cabin-images/cabin-001.jpg
@@ -75,7 +75,7 @@ export async function createEditCabin(newCabin, id) {
 }
 
 export async function deleteCabin(id) {
-    console.log("sccdmsknf")
+    // console.log("sccdmsknf")
     const { data, error } = await supabase
         .from('cabins')
         .delete()
@@ -85,7 +85,7 @@ export async function deleteCabin(id) {
         console.error(error)
         throw new Error("Cabin could not be deleted")
     }
-    console.log(data);
+    // console.log(data);
     return data;
 
 }

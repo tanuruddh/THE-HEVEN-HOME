@@ -39,7 +39,7 @@ function CheckinBooking() {
 
 
   if (isLoading || isLoadingSettings) return (<Spinner />);
-  console.log(booking)
+  // console.log(booking)
 
 
   const {

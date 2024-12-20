@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 
 export function useBooking() {
     const { bookingId } = useParams();
-    console.log(`Booking ${bookingId}`);
+    // console.log(`Booking ${bookingId}`);
 
     const {
         isPending,

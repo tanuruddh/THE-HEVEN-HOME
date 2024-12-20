@@ -34,7 +34,7 @@ function CreateCabinForm() {
   })
 
   function onSubmit(data) {
-    console.log(data);
+    // console.log(data);
     // Use the data object to send the form data to your server
     mutate({ ...data, image: data.image[0] });
   }

@@ -11,7 +11,7 @@ export function useLogin() {
     const { mutate: login, isPending: isLoading } = useMutation({
         mutationFn: ({ email, password }) => loginApi({ email, password }),
         onSuccess: (user) => {
-            console.log(user, isLoading);
+            // console.log(user, isLoading);
             queryClient.setQueryData(['user'], user.user)
             navigate('/dashboard', { replace: true });
         },
@@ -20,7 +20,7 @@ export function useLogin() {
             toast.error('Provided email or password are incorrect')
         }
     })
-    console.log(isLoading)
+    // console.log(isLoading)
     return {
         login,
         isLoading

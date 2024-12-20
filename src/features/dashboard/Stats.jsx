@@ -6,7 +6,7 @@ import { HiOutlineBanknotes, HiOutlineCalendarDays } from 'react-icons/hi2';
 function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
 
     const numBookings = bookings?.length;
-    console.log(bookings, confirmedStays);
+    // console.log(bookings, confirmedStays);
 
     const sales = bookings.reduce((acc, curr) => acc + curr.totalPrice, 0);
 
