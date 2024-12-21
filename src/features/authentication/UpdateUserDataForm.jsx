@@ -1,4 +1,6 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
+
 
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
@@ -24,6 +26,11 @@ function UpdateUserDataForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (email !== "tanuruddh12@gmail.com") {
+      toast.error("You are not authorized to update user, you are blocked to do this");
+      toast.error("This account is just giving you demo");
+      return false;
+    }
     if (!fullName) return;
     updateUser({ fullName, avatar }, {
       onSuccess: () => {

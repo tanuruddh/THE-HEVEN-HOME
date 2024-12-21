@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { login as loginApi } from "../../services/apiAuth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { uploadAll, uploadBookings } from "../../data/Uploader";
 
 
 export function useLogin() {
@@ -10,9 +11,11 @@ export function useLogin() {
 
     const { mutate: login, isPending: isLoading } = useMutation({
         mutationFn: ({ email, password }) => loginApi({ email, password }),
-        onSuccess: (user) => {
+        onSuccess: async (user) => {
             // console.log(user, isLoading);
             queryClient.setQueryData(['user'], user.user)
+            await uploadAll();
+            await uploadBookings();
             navigate('/dashboard', { replace: true });
         },
         onError: (error) => {

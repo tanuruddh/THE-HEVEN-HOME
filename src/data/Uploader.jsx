@@ -100,6 +100,24 @@ async function createBookings() {
   if (error) console.log(error.message);
 }
 
+export async function uploadAll() {
+  // Bookings need to be deleted FIRST
+  await deleteBookings();
+  await deleteGuests();
+  await deleteCabins();
+
+  // Bookings need to be created LAST
+  await createGuests();
+  await createCabins();
+  await createBookings();
+
+}
+
+export async function uploadBookings() {
+  await deleteBookings();
+  await createBookings();
+}
+
 function Uploader() {
   const [isLoading, setIsLoading] = useState(false);
 
